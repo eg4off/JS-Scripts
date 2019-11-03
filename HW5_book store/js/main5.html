@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BookShop</title>
+    <style>
+        *{
+        box-sizing: border-box;
+        }
+        img{
+            height: 300px;
+        }
+        .goods{
+            width: 250px;
+            height: 400px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+        #buttons{
+            margin-top: 10px;
+        }
+        #btn-cart:hover{
+            background-color: brown;
+            color: aqua;
+        }
+        #btn-cart:active{
+            background-color: blueviolet;
+        }
+    </style>
+</head>
+
+<body>
+        <div class="box">
+            <div class="number">
+                <span>Amount of products</span>
+                <input id="countPerPage" value="10" onchange="numberProducts()">
+            </div>
+            <div id="sort">
+                <button onclick="sortByName()">sort by name</button>
+                <button onclick="sortByPrice()">sort by price</button>
+            </div>
+        </div>
+        <div id="products"></div>
+        <div id="buttons"></div>
+
+    <script>
+
+        let productsPerPage = +document.getElementById('countPerPage').value;
+
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://www.json-generator.com/api/json/get/cqMDWKUiDC?indent=2");
+        xhr.send();
+
+        var func = (productsPerPage) => {
+            let content = '';
+
+            for (let i = 0; i < productsPerPage; i++) {
+                content +=
+                    `<div class="goods">
+                <img onmouseover="mOver(this)" onmouseout="mOut(this)" src="${products[i].image}"> 
+                <h4>${products[i].name}</h4>
+                <p>${products[i].author}</p>
+                <h5>${products[i].price} ₴</h5>
+                <input type="button" value="Buy now!" id="btn-cart">
+                </div>`
+            }
+            document.getElementById('products').innerHTML = content;
+        }
+
+        function numberProducts() {
+            let productsPerPage = +document.getElementById('countPerPage').value;
+
+            products = JSON.parse(xhr.response);
+
+            func(productsPerPage);
+            drawButtons(productsPerPage);
+            setEvents();
+        }
+        xhr.onload = numberProducts;
+
+        function addProducts(products) {
+            let content = '';
+
+            for (let i = 0; i < products.length; i++) {
+                content +=
+                    `<div class="goods">
+                <img onmouseover="mOver(this)" onmouseout="mOut(this)" src="${products[i].image}"> 
+               <h4>${products[i].name}</h4>
+                <p>${products[i].author}</p>
+                <h5>${products[i].price} ₴</h5>
+                <input type="button" value="Buy now!" id="btn-cart">
+                </div>`
+            }
+            document.getElementById('products').innerHTML = content;
+        }
+
+        function sortByName() {
+            numberProducts();
+            sortName(products);
+            func(productsPerPage);
+        }
+
+        function sortName(arr) {
+            arr.sort(function (a, b) {
+                if (a.name > b.name) {
+                    return 1;
+                }
+                if (a.name < b.name) {
+                    return -1;
+                }
+                return 0;
+            });
+        };
+
+        function sortByPrice() {
+            numberProducts();
+            sortPrice(products);
+            func(productsPerPage);
+        };
+
+        function sortPrice(arr) {
+            arr.sort(function (a, b) {
+                return a.price - b.price
+            });
+        };
+
+        function drawButtons(productsPerPage) {
+            let buttonCount = products.length / productsPerPage;
+            let butt = '';
+
+            for (let i = 0; i < buttonCount; i++) {
+
+                butt += (`<button class='numBtn'>${i + 1}</button>`)
+            }
+            document.getElementById('buttons').innerHTML = butt;
+        }
+
+        function setEvents() {
+            let items = document.getElementsByClassName('numBtn');
+
+            for (let item of items) {
+                item.addEventListener('click', function () {
+                    let pageNum = +this.innerHTML;
+                    let start = (pageNum - 1) * productsPerPage;
+                    let end = start + productsPerPage;
+
+                    let notes = products.slice(start, end)
+                    addProducts(notes);
+                    console.log(notes);
+                });
+            }
+        }
+
+        function mOver(element) {
+            element.style.opacity = "0.7";
+        }
+
+        function mOut(element) {
+            element.style.opacity = "1";
+        }
+
+    </script>
+</body>
+
+</html>

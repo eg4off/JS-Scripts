@@ -1,0 +1,242 @@
+﻿<!-- 
+    1. Создать объект Point, содержащий два свойства: "x" и "y" — координаты точки, и метод GetQuadrant, вычисляющий,
+       в каком квадранте в декартовой системе координат находится данная точка.
+       Протестируйте данный объект, изменяя значения его координат, и повторно вызавая метод GetQuadrant.-->
+    
+<!--    2. Создать объект Calculator, который должен содержать методы для расчета суммы, разности, произведения и частного двух чисел.
+       Протестировать данный объект, принимая от пользователя значения двух операндов и знак операции.
+       В зависимости от принятого знака операции, вызвать соответствующий метод.-->
+
+<!--    3. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект,
+       содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+       Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках.-->
+    
+<!--    4. Для предыдущего задания создайте функцию, которая будет принимать в себя массив объектов-сотрудников, и каждому из объектов
+       будет добавлять новое свойство "salary", хранящее зарплату сотрудника. 
+       Зарплата расчитывается, исходя из значения свойства "occupation" следующим образом:
+           • "director" — 3000;
+           • "manager" — 1500;
+           • "programmer" — 2000;
+           • для остальных значений — 1000.
+       После выполнения функции — вывести информацию о сотрудниках.-->
+           
+<!--    5. Для задания 3 создать метод, позволяющий отсортировать массив сотрудников по одному из свойств: name, sName, age, occupation, salary.
+       Параметр для сортировки принимается от пользователя.
+       После выполнения функции — вывести информацию о сотрудниках.
+
+     -->
+     <!DOCTYPE html>
+     <html xmlns="http://www.w3.org/1999/xhtml">
+     <head>
+      <title></title>
+      <script>
+      !-- 
+    1. /*Создать объект Point, содержащий два свойства: "x" и "y" — координаты точки, и метод GetQuadrant, вычисляющий,
+       в каком квадранте в декартовой системе координат находится данная точка.
+       Протестируйте данный объект, изменяя значения его координат, и повторно вызавая метод GetQuadrant.-->*/
+       var n1 = +prompt("Input x");
+       var n2 = +prompt("Input y");
+       var point = {
+            x: n1,
+            y: n2,
+         }
+         var GetQuadrant = function(x,y){
+               if(point.x > 0 && point.y > 0){
+                  alert('Point in the quarel 1');
+               } else if(point.x > 0 && point.y < 0){
+                  alert('Point in the quarel 2');
+               } else if(point.x < 0 && point.y > 0){
+                  alert('Point in the quarel 3');
+               } else if(point.x < 0 && point.y < 0){
+                  alert('Point in the quarel 4');
+              } 
+            } 
+            GetQuadrant();
+            if (n1!==Number && n2!==Number){
+            alert('You inputed not a number!')
+            };
+
+
+
+      /*   2. Создать объект Calculator, который должен содержать методы для расчета суммы, разности, произведения и частного двух чисел.
+       Протестировать данный объект, принимая от пользователя значения двух операндов и знак операции.
+       В зависимости от принятого знака операции, вызвать соответствующий метод.*/
+              
+       var num1 = +prompt("Input x");
+       var sign = prompt("input maths symbol +, -, *, /");
+       var num2 = +prompt("Input y");
+       var calculator = {
+            x: num1,
+            y: num2,
+            sym: sign,
+            sum: function(){
+                     return this.x + this.y
+                },
+            sub: function(){
+                    return this.x - this.y
+                },
+            mul: function(){
+                    return this.x * this.y
+                },
+            div: function(){
+                return this.x / this.y
+                },
+            res: function(){
+                if(this.sym === '+'){
+                    return this.sum()
+            } else if(this.sym === '-'){
+                    return this.sub()
+            } else if(this.sym === '*'){
+                    return this.mul()
+            } else if(this.sym === '/'){
+                    return this.div()
+            }
+            };
+ alert(calculator.res())
+       
+
+           /* 3. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект,
+       содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+       Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках.-->*/
+      
+            
+       var staff =[]  
+       for (var i=0; i < 4; i++){
+           var worker = {
+                name: prompt("Enter first name:"),
+                sName: prompt("Enter surname:"),
+                age: prompt("Enter age:"),
+                occupation: prompt("Enter occupation:"),
+                show: function () {
+                    return ('Name: ' + this.name + '<br>' + 'Surname: ' + this.sName + '<br>' + 'Age: ' + this.age + '<br>' + 'Occupation: ' + this.occupation + '<br>' + '<br>')
+                }
+           }
+           staff.push(worker)
+       };
+       staff.forEach(function(worker) {
+            document.write(worker.show() + '<br>');  
+        })
+        
+        
+
+       /* 4. Для предыдущего задания создайте функцию, которая будет принимать в себя массив объектов-сотрудников, и каждому из объектов
+       будет добавлять новое свойство "salary", хранящее зарплату сотрудника. 
+       Зарплата расчитывается, исходя из значения свойства "occupation" следующим образом:
+           • "director" — 3000;
+           • "manager" — 1500;
+           • "programmer" — 2000;
+           • для остальных значений — 1000.
+       После выполнения функции — вывести информацию о сотрудниках.*/
+
+       var staff =[]  
+       for (var i=0; i < 4; i++){
+           var worker = {
+                name: prompt("Enter first name:"),
+                sName: prompt("Enter surname:"),
+                age: prompt("Enter age:"),
+                occupation: prompt("Enter occupation:"),
+                show: function () {
+                    return ('Name: ' + this.name + '<br>' + 'Surname: ' + this.sName + '<br>' + 'Age: ' + this.age + '<br>' + 'Occupation: ' + this.occupation + '<br>' + '<br>')
+                }
+           }
+           staff.push(worker)
+       };
+        function paymentSalary(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                switch (arr[i].occupation) {
+                    case "director":
+                        arr[i].salary = 3000;
+                        break;
+                    case "manager":
+                        arr[i].salary = 1500;
+                        break;
+                    case "programmer":
+                        arr[i].salary = 2000;
+                        break;
+                    default:
+                        arr[i].salary = 1000;
+                }
+            }
+        };
+        paymentSalary(staff);
+        for (var i = 0; i < staff.length; i++) {
+            document.write('Name: ' + staff[i].name + '<br>' + 'Surname: ' + staff[i].sName + '<br>' + 'Age: ' + staff[i].age + '<br>' +'Occupation: ' + staff[i].occupation + '<br>' + "Salary: " + staff[i].salary +'<br>' + '<br>')
+        }
+           
+        /*5. Для задания 3 создать метод, позволяющий отсортировать массив сотрудников по одному из свойств: name, sName, age, occupation, salary.
+       Параметр для сортировки принимается от пользователя.
+       После выполнения функции — вывести информацию о сотрудниках.*/
+
+       var staff =[]  
+       for (var i=0; i < 4; i++){
+           var worker = {
+                name: prompt("Enter first name:"),
+                sName: prompt("Enter surname:"),
+                age: prompt("Enter age:"),
+                occupation: prompt("Enter occupation:"),
+                show: function () {
+                    return ('Name: ' + this.name + '<br>' + 'Surname: ' + this.sName + '<br>' + 'Age: ' + this.age + '<br>' + 'Occupation: ' + this.occupation + '<br>' + '<br>')
+                }
+           }
+           staff.push(worker)
+       };
+       function paymentSalary(arr) {
+            for (var i = 0; i < arr.length; i++) {
+                switch (arr[i].occupation) {
+                    case "director":
+                        arr[i].salary = 3000;
+                        break;
+                    case "manager":
+                        arr[i].salary = 1500;
+                        break;
+                    case "programmer":
+                        arr[i].salary = 2000;
+                        break;
+                    default:
+                        arr[i].salary = 1000;
+                }
+            }
+        };
+        paymentSalary(staff);
+       var sorting = prompt("Enter category of sorting (name, sName, age, occupation, salary): ");
+        staff.sort(function(a, b) {
+            switch (sorting) {
+                case "name":
+                    if (a["name"] > b["name"]) {
+                        return 1;
+                    } else if (a["name"] < b["name"]) {
+                        return -1;
+                    } else {return 0;}
+                    break;
+                case "sName":
+                    if (a["sName"] > b["sName"]) {
+                        return 1;
+                    } else if (a["sName"] < b["sName"]) {
+                        return -1;
+                    } else {return 0;}
+                    break;
+                case "age":
+                    return a["age"] - b["age"];
+                    break;
+                case "occupation":
+                    if (a["occupation"] > b["occupation"]) {
+                        return 1;
+                    } else if (a["occupation"] < b["occupation"]) {
+                        return -1;
+                    } else {return 0;}
+                    break;
+                case "salary":
+                    return a["salary"] - b["salary"];
+                    break;
+                default:
+                    alert("None");
+            }
+        })
+            
+    
+      </script>
+
+    </head>
+    <body>
+    </body>
+    </html>

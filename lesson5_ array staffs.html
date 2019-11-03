@@ -1,0 +1,59 @@
+<!-- 3. Создать массив, который будет хранить в себе информацию о сотрудниках предприятия. Каждый элемент масива — объект,
+содержащий свойства: name, sName, age, occupation, и метод show, который выводит всю информацию о пользователе.
+Реализовать заполнение массива пользователем. По окончанию заполнения — вывести информацию о сотрудниках. -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homework_5_Poiarko</title>
+</head>
+
+<body>
+    <script>
+
+        var employees = []
+        for (var i = 0; i < 2; i++) {
+            // item = employees[i];
+            
+            var item = {
+                name: prompt("Enter first name:"),
+                sName: prompt("Enter surname:"),
+                age: prompt("Enter age:"),
+                occupation: prompt("Enter occupation:"),
+                show: function () {
+                    return ('Name: ' + this.name + ', Surname: ' + this.sName + ', age: ' + this.age + ', Occupation: ' + this.occupation)
+                }
+            }
+
+            employees.push(item)
+        } 
+        
+        employees.forEach(function(item) {
+            document.write(item.show() + "<br>");  
+        })
+            
+        // for (var i = 0; i < employees.length; i++) {
+        //     var item = employees[i];
+        //     document.write(item.show() + "<br>");  
+        // }
+            
+        // for (var item of employees) {
+        //     document.write(item.show() + "<br>");  
+        // }
+            
+    
+
+
+    </script>
+
+    <script>
+       
+    </script>
+</body>
+
+</html>

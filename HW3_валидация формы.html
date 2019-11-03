@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+        #form {
+    width: 550px;
+    height: 330px;
+    margin: 100px auto 50px auto;
+    padding: 20px;
+    position: relative;
+    background: #fff url(dаta:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAMAAAB883U1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRF7+/v7u7u////REBVnAAAAAN0Uk5T//8A18oNQQAAABZJREFUeNpiYGJiYmBiYgRiBhAGCDAAALsAFJhiJ+UAAAAASUVORK5CYII=);
+    border: 1px solid #ccc;
+    border-radius: 3px;  
+}
+#form::before, 
+#form::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 2px;
+    right: 2px;
+    top: 0;
+    z-index: -1;
+    background: #fff;
+    border: 1px solid #ccc;            
+}
+#form::after {
+    left: 4px;
+    right: 4px;
+    bottom: -5px;
+    z-index: -2;
+    box-shadow: 0 8px 8px -5px rgba(0,0,0,.3);
+}
+::-webkit-input-placeholder {
+   color: #bbb;
+}
+:-moz-placeholder {
+   color: #bbb;
+}                         
+.placeholder{
+    color: #bbb; /* polyfill */
+}        
+#form input{
+    margin: 5px 0;
+    padding: 15px;
+    width: 100%;
+    *width: 518px; /* IE7 and below */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;    
+}
+#form input:focus{
+        outline: 0;
+        border-color: #aaa;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .3) inset;
+}        
+#form .validateBtn{
+    margin: 20px 0 0 0;
+    padding: 15px 8px;            
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #2493FF;
+    overflow: visible;
+    display: inline-block;
+    color: #fff;
+    font: bold 1.4em arial, helvetica;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.4);          
+    background-color: #2493ff;
+    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0)); 
+    transition: background-color .2s ease-out;
+    border-radius: 3px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .3), 0 1px 0 rgba(255, 255, 255, .5) inset;                                    
+}
+#form .validateBtn:hover{
+      background-color: #7cbfff;
+        border-color: #7cbfff;
+}
+#form .validateBtn:active{
+    position: relative;
+    top: 3px;
+    text-shadow: none;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset;
+}
+        </style>
+    </head>
+    <body>
+            <form method="post" name="form" id="form" class = "form">
+                    <div id="email_error"></div>
+                    <input placeholder="email@email.com" name="email" type="email"  class='email field' id="email" onchange="checkEmail()">
+                    <input placeholder="Выберите пароль" name="pass1" type="password" class='pass1 field' id="pass1">
+                    <input placeholder="Повторите пароль" name="pass2" type="password" class='pass2 field' id="pass2">                    
+                    <!--<button type="submit" name="button" class='validateBtn' onclick="toSite()">Enter</button>-->
+                    <input type="button" name="button" class='validateBtn' onclick="toSite()" value="Enter" id="btn">
+
+                </form>
+            <script>
+                
+                /*У нас есть форма регистрации, нужно сделать проверку когда пользователь ввел почту и не нажал на кнопку Войти нужно проверить почту на корректность (проверки на наличие собачки будет достаточно) Если с почтой все нормально сообщение нужно убрать. По нажатию на кнопку "войти" нужно проверить есть ли ошибочное сообщение. Если нет перенаправить на сайт. - 2 балла*/
+                
+                var email = document.getElementById("email");
+                var emailError = document.getElementById('email_error');
+
+            function checkEmail() {
+                if (email.value.split('@').length - 1 === 0) {
+                    email.style.border = "1px solid red";
+                    document.getElementById('email').style.color = "red";
+                    emailError.innerHTML = " Email дожен содержать символ '@'";
+                    emailError.style.color = "red";
+                    return false;
+                } else{
+                    email.style.border = "1px solid #5e6e66";
+                    document.getElementById('email').style.color = "#5e6e66";
+                    emailError.innerHTML = "";
+                    return true;
+                    }
+            }
+            function toSite() {
+                if (emailError.innerText == "") {
+                    window.location.href="https://google.com";
+                }
+            }
+
+            </script>
+    </body>
+</html>

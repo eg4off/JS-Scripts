@@ -1,0 +1,190 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Lesson3. Functions. Home tasks</title>
+  </head>
+  <body>
+<script>
+// 1. Создать функцию calculate(operand1, operand2, sign), где operand1 и operand2 — два числа, sign — знак арифметической операции.
+//    Функция должна расчитывать результат операции, исходя из переданного ей знака.
+//    Функция должна проверять корректность введенных чисел и знака операции.
+//    Все аргументы для функции принять от пользователя.
+
+function calculate (operand1, operand2, sign){
+  var result;
+  switch (sign) {
+            case "+":{
+                result = operand1 + operand2;
+                break;}
+            case "-":{
+                result = operand1 - operand2;
+                break;}
+            case "*":{
+                result = operand1 * operand2;
+                break;}
+            case "/":{
+                result = operand1 / operand2;
+                break;}
+            case "%":{
+              result= operand1 % operand2;
+              break;
+            }
+  };
+  return result;
+};
+var operand1=+prompt('Number1');
+var sign=prompt('Operation: - + * /');
+var operand2=+prompt('Number2');
+var res = calculate(operand1, operand2, sign);
+        if (res != undefined) {
+            alert(res);
+        }
+
+/*function calculate (operand1, operand2, sign){
+    var result;
+    if (sing==='+'){
+      result = operand1 + operand2;
+    } else if(sing==='-'){
+      result = operand1 - operand2;
+    }else if(sing==='*'){
+      result = operand1 * operand2;
+    }else if(sing==='/'){
+      result = operand1 / operand2;
+    }else if(sing===''){
+      alert('Wrong symbol')
+    };
+    return result
+alert(calculate);*/
+
+
+/*function calculate(operand1, operand2, sign){
+  var result;
+  switch (sign) {
+            case "+":
+                result = (operand1 + operand2);
+                break;
+            case "-":
+                result = (operand1 - operand2);
+                break;
+            case "*":
+                result = (operand1 * operand2);
+                break;
+            case "/":
+                result = (operand1 / operand2);
+                break;
+            default:
+                document.write("<p><b style='color:red'>" + sign + "</b> - it is not maths symbol.</p>");
+               }
+          return result;
+        }
+  if (result != undefined) {
+            document.write("Operation result: " + result);
+        }*/
+
+
+</script>
+
+<script>
+
+// 2. Создать функцию, возводящую число в степень, число и сама степень вводится пользователем
+
+function degree(x, y) {
+  var result = x;
+  for (var i = 1; i < y; i++) {
+    result *= x;
+  }
+  return result;
+}
+var x = +prompt("Enter number", '');
+var y = +prompt("Enter degree", '');
+if (x < 1) {
+  alert('Degree ' + x + ' imposible');
+} else {
+  alert( degree(x, y) );
+}
+
+
+
+</script>
+
+<script>
+// 3.  Создать игру "Камень-Ножницы-Бумага".
+//     Выбор компьютера определяется строкой:
+//     var computerChoice = Math.random();
+//     alert(computerChoice);
+//     Math.random() выдает произвольное число в промежутке от 0 до 1, на основании этого можно построить принцип выбора решения компьютера.
+
+
+var userChoice = prompt("Введите: камень, ножницы или бумага?");
+var computerChoice = Math.random();
+if (computerChoice < 0.34) {
+  computerChoice = 'камень';
+} else if (computerChoice <= 0.67 && computerChoice >= 0.35) {
+  computerChoice = 'ножницы';
+} else {
+  computerChoice = 'бумага';
+}
+alert("Ваш выбор: " + userChoice);
+alert('Компьютер: ' + computerChoice);
+console.log(computerChoice);
+var compare = function(choice1, choice2) {
+  if (choice1 == choice2) {
+    return 'Ничья';
+  } else if (choice1 === 'камень') {
+    if (choice2 === 'ножницы') {
+      return 'Камень победил';
+    } else {
+      return 'Бумага победила';
+    }
+  } else if (choice1 === 'бумага') {
+    if (choice2 === 'камень') {
+      return 'Бумага победила';
+    } else {
+      return 'Ножницы победили';
+    }
+  } else if (choice1 === 'ножницы') {
+    if (choice2 === 'бумага') {
+      return 'Ножницы победили';
+    } else {
+      return 'Камень победил';
+    }
+  }
+}
+var result = compare(userChoice, computerChoice);
+alert(result);
+
+
+</script>
+
+<script>
+  // 4. Напишите функцию, которая возвращает n-е число Фибоначчи. Для решения используйте цикл.
+  // бонус: для решения использовать не цикл, а рекурсию
+//Цикл
+var n=+prompt('n');
+function calcFib(n) {
+  var a = 0;
+  var b = 1;
+  var c = b;
+  for (var i = 3; i <= n; i++) {
+    document.write(c + '<br>');
+    c = a + b;
+    a = b;
+    b = c;
+  };
+}
+calcFib(n);
+
+//Рекурсия
+var n=+prompt('n');
+function calcFib(n) {
+  return n <= 1 ? n : calcFib(n - 1) + calcFib(n - 2);
+};
+document.write(calcFib(n));
+
+
+
+</script>
+  </body>
+</html>

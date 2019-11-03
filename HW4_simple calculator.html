@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        <input type="text" id="calc" />
+        <input type="button" value="calculate" onclick="calculate()" />
+        <input type="text" id="res" disabled />
+        <script>
+            function calculate(){
+                str = document.getElementById('calc').value;
+                document.getElementById('res').value = eval(str);
+            }
+        </script>
+</body>
+</html>

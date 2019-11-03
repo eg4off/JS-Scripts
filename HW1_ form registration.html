@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <style>
+        #form {
+    width: 550px;
+    height: 330px;
+    margin: 100px auto 50px auto;
+    padding: 20px;
+    position: relative;
+    background: #fff url(dаta:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAECAMAAAB883U1AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAlQTFRF7+/v7u7u////REBVnAAAAAN0Uk5T//8A18oNQQAAABZJREFUeNpiYGJiYmBiYgRiBhAGCDAAALsAFJhiJ+UAAAAASUVORK5CYII=);
+    border: 1px solid #ccc;
+    border-radius: 3px;  
+}
+#form::before, 
+#form::after {
+    content: "";
+    position: absolute;
+    bottom: -3px;
+    left: 2px;
+    right: 2px;
+    top: 0;
+    z-index: -1;
+    background: #fff;
+    border: 1px solid #ccc;            
+}
+#form::after {
+    left: 4px;
+    right: 4px;
+    bottom: -5px;
+    z-index: -2;
+    box-shadow: 0 8px 8px -5px rgba(0,0,0,.3);
+}
+::-webkit-input-placeholder {
+   color: #bbb;
+}
+:-moz-placeholder {
+   color: #bbb;
+}                         
+.placeholder{
+    color: #bbb; /* polyfill */
+}        
+#form input{
+    margin: 5px 0;
+    padding: 15px;
+    width: 100%;
+    *width: 518px; /* IE7 and below */
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 3px;    
+}
+#form input:focus{
+        outline: 0;
+        border-color: #aaa;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .3) inset;
+}        
+#form button{
+    margin: 20px 0 0 0;
+    padding: 15px 8px;            
+    width: 100%;
+    cursor: pointer;
+    border: 1px solid #2493FF;
+    overflow: visible;
+    display: inline-block;
+    color: #fff;
+    font: bold 1.4em arial, helvetica;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.4);          
+    background-color: #2493ff;
+    background-image: linear-gradient(top, rgba(255,255,255,.5), rgba(255,255,255,0)); 
+    transition: background-color .2s ease-out;
+    border-radius: 3px;
+    box-shadow: 0 2px 1px rgba(0, 0, 0, .3), 0 1px 0 rgba(255, 255, 255, .5) inset;                                    
+}
+#form button:hover{
+      background-color: #7cbfff;
+        border-color: #7cbfff;
+}
+#form button:active{
+    position: relative;
+    top: 3px;
+    text-shadow: none;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, .3) inset;
+}
+        </style>
+    </head>
+    <body>
+            <form method="post" name="form" id="form" class = "form" onsubmit="return Validate()">
+                    <input placeholder="email@email.com" name="email" type="email"  class='email field' onclick="checkFields(),checkEmail()">
+                    <input placeholder="Выберите пароль" name="pass1" type="password" class='pass1 field' onclick="checkFields(),checkPassword()">
+                    <input placeholder="Повторите пароль" name="pass2" type="password" class='pass2 field' onclick="checkPasswordMatch()">                    
+                    <button type="submit" name="button" class='validateBtn' onclick="removeValid()">Validate</button>
+                </form>
+            <script>
+                /*Создать форму регистрации как на фото.
+   По нажатию на кнопку добавить проверку корректности email и password.
+   email - должен содержать только один символ "@" и символ "." не может быть пустым полем.
+   password - не может быть пустым и минимальная длинна пароля 11 символов.
+   confirmPassword - должен совпадать с полем password.
+   Если какое-то из условий не проходит мы должны подсветить соответствующий input красным цветом и вывести под ним соответствующее сообщение.*/
+
+                var form = document.querySelector('.form')
+                var validateBtn = document.querySelector('.validateBtn')
+                var email = document.querySelector('.email')
+                var pass1 = document.querySelector('.pass1')
+                var pass2 = document.querySelector('.pass2')
+                var fields = document.querySelectorAll('.field')
+
+                var checkFields = function(){
+                    for(var i=0; i < fields.length; i++){
+                        if(fields[i].value === '' || fields[i].value === ' '){
+                            var error = document.createElement('div')
+                            error.className = 'error'
+                            error.style.color = 'red'
+                            error.innerHTML = 'Поле не заполнено!'
+                            form[i].parentElement.insertBefore(error, fields[i])
+                            fields[i].style.border = '1px solid red'
+                        }else{
+                        var errors = document.querySelector('.error')
+                        errors.remove()
+                        }
+                    return
+                    }
+                }
+
+                var checkEmail = function(){
+                    if (email.value.split('@').length - 1 === 0 || email.value.split('.').length - 1 === 0){
+                            var error = document.createElement('div')
+                            error.className = 'error'
+                            error.style.color = 'red'
+                            error.innerHTML = 'email дожен содержать символы "@" и "."'
+                            email.parentElement.insertBefore(error, email)
+                            email.style.border = '1px solid red'
+                    }else{
+                        var errors = document.querySelector('.error')
+                        errors.remove()
+                        }
+                    return
+                }
+
+                var checkPassword = function(){
+                    if (pass1.value.length < 11){
+                            var error = document.createElement('div')
+                            error.className = 'error'
+                            error.style.color = 'red'
+                            error.innerHTML = 'Пароль дожен быть не менее 11 символов!'
+                            pass1.parentElement.insertBefore(error, pass1)
+                            pass1.style.border = '1px solid red'
+                    }else{
+                        var errors = document.querySelector('.error')
+                        errors.remove()
+                        }
+                    return 
+                }
+
+                var checkPasswordMatch = function(){
+                    if(pass1.value !== pass2.value){
+                            var error = document.createElement('div')
+                            error.className = 'error'
+                            error.style.color = 'red'
+                            error.innerHTML = 'Пароли не совпадают!'
+                            pass2.parentElement.insertBefore(error, pass2)
+                            pass2.style.border = '1px solid red'
+                    }else{
+                        var errors = document.querySelector('.error')
+                        errors.remove()
+                        }
+                }
+
+            </script>
+    </body>
+</html>

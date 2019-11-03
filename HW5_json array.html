@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="countPage">20</div>
+    <div id="product"></div>
+    <div id="buttons"></div>
+    
+    <script>
+
+        var products = [];
+            let xhr = new XMLHttpRequest();
+            //xhr.open('GET', "http://www.json-generator.com/api/json/get/cqJivCnJXC?indent=2");
+            xhr.open('GET', "http://www.json-generator.com/api/json/get/cjlqafMvCa?indent=2");
+            xhr.send();
+            var func = (response) => {
+                let string = ''
+                for(let i = 0; i<20; i++){
+                   string +=  `name=${response[i].name}, age=${response[i].age} </br>`;
+                }
+                document.getElementById('product').innerHTML = string
+            }
+            xhr.onload = function(){
+                products = JSON.parse(xhr.response);
+                func(products)
+                }
+
+        function drawButtons(productPerPage){
+            let buttonCount = products.length/productPerPage;
+            let c = '';
+
+             for (let i=0; i<buttonCount; i++){
+             c += (`<button>${i+1}</button>`)
+             };
+             document.getElementById('buttons').innerHTML = c;
+        }
+       const a=() => {
+        var productPerPage = +document.getElementById('countPage').innerText;
+        drawButtons(productPerPage) 
+       }  ;
+       a();
+
+
+    </script>
+</body>
+</html>

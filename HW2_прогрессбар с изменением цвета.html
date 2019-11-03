@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <style>
+        .bar {
+            transition: 5s;
+            width: 100px;
+            height: 20px;
+            background: red;
+        }
+
+
+        .bar.full,
+        .bar:hover {
+            width: 500px;
+            background: yellow;
+        }
+    </style>
+    </body>
+</head>
+
+<body>
+    <!--Имеем следующий код, нужно создать класс по управлению прогрес баром. Класс должен иметь функционал изменения цвета, ширины прогрес бара.
+Реализовать три кнопки и один инпут 1)Увеличивает каждый раз ширину на 100px 2)Сбрасывает ширину до 0px 3)изменят цвет на тот который ввели в инпуте 4 балла
+-->
+    <div class='bar' id="myBar">
+    
+
+    </div>
+    <input type="button" id="addWidth" value="Add width" onclick="move()">
+    <input type="button" id="resetWidth" value="Reset width" onclick="reset()">
+    <input type="text" id="inputColor" placeholder="Input color">
+    <input type="button" id="changeColor" value="Change color" onclick="setColor()">
+    <script>
+       
+        //var addWidth = document.getElementById('addWidth');
+        var resetWidth = document.getElementById('resetWidth');
+        var changeColor = document.getElementById('changeColor');
+        var progress = document.getElementById("myBar");
+
+        var z = 500;
+        function move() {
+            z += 100;
+            var color = document.getElementById("inputColor").value;
+            var a = `${color}`;
+            progress.onmouseover = function () {
+                if (color != "") {
+                    progress.style.background = "yellow";
+                    progress.style.width = `${z}px`;
+                } else {
+                    progress.style.width = `${z}px`;
+                    progress.style.background = "yellow";
+                }
+            }
+            progress.onmouseout = function () {
+                if (color != "") {
+                    progress.style.width = `${100}px`;
+                    progress.style.background = `${a}`;
+                } else {
+                    progress.style.width = `${100}px`;
+                    progress.style.background = "red";
+                }
+            }
+        }
+
+        function reset(){
+            var color = document.getElementById("inputColor").value;
+            var a = `${color}`;
+
+            progress.onmouseover = function () {
+                if (reset && color) {
+                    progress.style.width = "100px";
+                    z = 100;
+                    progress.style.background = "yellow";
+                } else if (reset && color == "") {
+                    progress.style.width = "100px";
+                    z = 100;
+                    progress.style.background = "yellow";
+                }
+            }
+
+            progress.onmouseout = function () {
+                if (reset && color != "") {
+                    progress.style.width = "100px";
+                    z = 100;
+                    progress.style.background = `${a}`;
+
+                } else if (add && reset && color == "") {
+                    progress.style.width = "100px";
+                    z = 100;
+                    progress.style.background = "red";
+                }
+            }
+        }
+
+        function setColor(){
+            if (changeColor) {
+                var color = document.getElementById("inputColor").value;
+                var a = `${color}`;
+                progress.style.background = `${a}`;
+                progress.onmouseover = function () {
+                    progress.style.background = "yellow";
+                }
+                progress.onmouseout = function () {
+                    progress.style.background = `${a}`;
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

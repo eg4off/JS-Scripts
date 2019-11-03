@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Book store</title>
+</head>
+<body>
+    <h1>Book Store</h1>
+    <div class="page">
+        <ul>
+			<li onclick="detBooks()" id="detective">Detective</li>
+            <li onclick="mysBooks()" id="mystic">Mystic</li>
+            <li onclick="hisBooks()" id="historical">Historical</li>
+        </ul>
+    </div>
+
+    <script>
+	var showingDetective = false;
+	var showingMystic = false;
+    var showingHistorical = false;
+
+    class detectiveBook {
+	    constructor(img, name, author, price){
+            this.img = img,
+            this.name = name,
+		    this.author = author,
+		    this.price = price
+	    }
+    }
+
+    var dBooks = [
+	    new detectiveBook("1", 'The Turkish Gambit', 'Boris Akunin', '385₴' ),
+	    new detectiveBook("2", 'The Murder at the Vicarage', 'Agatha Christie', '150₴' ),
+	    new detectiveBook("3", 'The Da Vinci Code ', 'Dan Brown', '310₴'),
+	    new detectiveBook("4", 'The Outsider', 'Stephen King', '390₴'),
+    ]
+
+	function detBooks() {
+		if(showingDetective) 
+			return;
+    	for(detectiveBook of dBooks) {
+		document.getElementById("detective").innerHTML += 
+			`<table border="1">
+				<tr>
+					<td onmouseover="changeColor(this)" onmouseout="defaultcolor(this)" id="detecS${detectiveBook.img}"><img src="${detectiveBook.img}.jpg"></td>
+					<td width="200px" style="text-align:center">${detectiveBook.name}</td>
+					<td width="120px" style="text-align:center">${detectiveBook.author}</td>
+					<td width="100px" style="text-align:center">${detectiveBook.price}</td>
+					<td>
+						<input type="button" value="&#9668;" id="minus_${detectiveBook.img}" onclick="minus(this)">
+						<input type="text" size="10" value="0" id="count_${detectiveBook.img}">
+						<input type="button" value="&#9658;" id="plus_${detectiveBook.img}" onclick="plus(this)">
+					</td>
+					<td>
+						<input type="button" value="Buy it">
+					</td>
+				</tr>
+			</table>`
+		}
+		showingDetective = true;
+	}
+	
+	class mysticBook {
+	    constructor(img, name, author, price){
+            this.img = img,
+            this.name = name,
+		    this.author = author,
+		   	this.price = price
+	    }
+    }
+
+    var mBooks = [
+	    new mysticBook("5", 'It', 'Stephen King', '180₴' ),
+	    new mysticBook("6", 'The Shining', 'Stephen King', '120₴' ),
+	    new mysticBook("7", 'At the Mountains of Madness', 'Howard Lovecraft', '100₴'),
+	    new mysticBook("8", 'The Raven', 'Edgar Allan Poe', '95₴'),
+	]
+
+	function mysBooks() {
+		if(showingMystic) 
+			return;
+		for(mysticBook of mBooks) {
+		document.getElementById("mystic").innerHTML +=
+			`<table border="1">
+				<tr>
+					<td><img onmouseover="changeColor(this)" onmouseout="defaultcolor(this)" src="${mysticBook.img}.jpg" id="puppy${mysticBook.img}"></td>
+					<td width="200px" style="text-align:center">${mysticBook.name}</td>
+					<td width="120px" style="text-align:center">${mysticBook.author}</td>
+					<td width="100px" style="text-align:center">${mysticBook.price}</td>
+					<td>
+						<input type="button" value="&#9668;" id="minus_${mysticBook.img}" onclick="minus(this)">
+						<input type="text" size="10" value="0" id="count_${mysticBook.img}">
+						<input type="button" value="&#9658;" id="plus_${mysticBook.img}" onclick="plus(this)">
+					</td>
+					<td>
+						<input type="button" value="Buy it">
+					</td>
+				</tr>
+			</table>`
+		}
+		showingMystic = true;
+	}
+
+	class historicalBook {
+	    constructor(img, name, author, price){
+            this.img = img,
+            this.name = name,
+		    this.author = author,
+		   	this.price = price
+	    }
+    }
+
+    var hBooks = [
+	    new historicalBook("9", 'The Talisman', 'Walter Scott', '150₴' ),
+	    new historicalBook("10", 'Tai-pan', 'James Clavell', '195₴' ),
+	    new historicalBook("11", 'The Last of the Mohicans', 'James Fenimore Cooper', '140₴'),
+	    new historicalBook("12", 'The Count of Monte Cristo', 'Alexandre Dumas', '205₴'),
+	]
+
+	function hisBooks() {
+		if(showingHistorical) 
+			return;
+		for(historicalBook of hBooks) {
+		document.getElementById("historical").innerHTML +=
+			`<table border="1">
+				<tr>
+					<td><img onmouseover="changeColor(this)" onmouseout="defaultcolor(this)" src="${historicalBook.img}.jpg" id="puppy${historicalBook.img}"></td>
+					<td width="200px" style="text-align:center">${historicalBook.name}</td>
+					<td width="120px" style="text-align:center">${historicalBook.author}</td>
+					<td width="100px" style="text-align:center">${historicalBook.price}</td>
+					<td>
+						<input type="button" value="&#9668;" id="minus_${historicalBook.img}" onclick="minus(this)">
+						<input type="text" size="10" value="0" id="count_${historicalBook.img}">
+						<input type="button" value="&#9658;" id="plus_${historicalBook.img}" onclick="plus(this)">
+					</td>
+					<td>
+						<input type="button" value="Buy it">
+					</td>
+				</tr>
+			</table>`
+		}
+		showingHistorical = true;
+	}
+
+
+	function changeColor(elem) {
+		elem.style.backgroundColor = "#F1EDE9";
+		elem.style.border = "5px solid #F1EDE9";
+	}
+
+	function defaultcolor(elem) {
+		elem.style.backgroundColor = "transparent";
+		elem.style.border = "none";
+	}
+
+	function plus(caller) {
+		var itemid = caller.id.split("_");
+		var textbox = document.getElementById(`count_${itemid[1]}`);
+		textbox.value = Number(textbox.value) + 1;
+	}
+
+	function minus(caller) {
+		console.log("munus");
+		var itemid = caller.id.split("_");
+		var textbox = document.getElementById(`count_${itemid[1]}`);
+		if(Number(textbox.value) > 0)
+			textbox.value = Number(textbox.value) - 1;
+		else if (Number(textbox.value) <= 0)
+			textbox.value = 0;
+	}
+
+    </script>
+</body>
+</html>

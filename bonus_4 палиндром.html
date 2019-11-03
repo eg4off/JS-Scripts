@@ -1,0 +1,18 @@
+<!--
+	Определить, является ли заданная строка (фраза) палиндромом
+	var s = "А РОЗА УПАЛА НА ЛАПУ АЗОРА"; // палиндром
+	
+-->
+<script>
+  var s = 'А РОЗА УПАЛА НА ЛАПУ АЗОРА';
+  var arr = s.split('');
+  console.log(arr);
+  var arr2=arr.join(' ');
+  console.log(arr2);
+  function toString(s){
+  var sSplit=s.split('');
+  sSplit.reverse();
+  console.log(sSplit.join(' '))
+  };
+  toString(s);
+</script>

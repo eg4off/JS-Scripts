@@ -1,0 +1,13 @@
+*{
+    box-sizing: border-box;
+}
+#products{
+
+}
+.info-books{
+    width: 250px;
+    height: 400px;
+    margin: 0 auto;
+    margin: 20px 0;
+    display: inline-block;
+};

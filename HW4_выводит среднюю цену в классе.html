@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        
+        //создать класс car у которого будет свойство price и функцию которая принимает массив машин и выводит среднюю цену за машину. 2 - балла
+
+        class Auto {
+            constructor() {
+                this.cars = [];
+            }
+            add(car) {
+                this.cars.push(car); 
+            }
+            average() {
+                let sum = 0;
+                for(var i = 0; i < this.cars.length; i++) {
+                    sum += this.cars[i].price;
+                }
+                var avPrice = sum / this.cars.length;
+                document.write(avPrice);
+            }
+        }
+
+        class newCar {
+            constructor(price){
+                this.price = price;
+            }
+        }    
+
+        var auto = new Auto();
+        auto.add(new newCar(100000));
+        auto.add(new newCar(200000));
+        auto.add(new newCar(300000));
+        auto.add(new newCar(400000));
+        auto.add(new newCar(600000));
+        auto.average();
+
+    </script>
+</body>
+</html>

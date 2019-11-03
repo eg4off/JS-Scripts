@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add block</title>
+</head>
+<body>
+        <div id="block"></div>
+        <button id="d2" onclick=" oneclik ()">Just click it!</button>
+        <script>
+/*По нажатия на кнопу у нас добавляются элементы в контейнер. 1 балл.*/
+
+            function oneclik (){
+             let element = document.getElementById("block");
+             var divText = document.createElement("div");
+             divText.setAttribute("style", "color: red")
+             divText.innerText = "New text in new block"
+            element.appendChild(divText);
+            }
+        </script>
+    </body>
+</html>
